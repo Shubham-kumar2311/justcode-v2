@@ -1,0 +1,28 @@
+{
+  "name": "justcode",
+  "version": "1.0.0",
+  "description": "An AI enabled platform for practicing coding problems",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "bootstrap": "^5.3.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.0",
+    "nanoid": "^5.0.9",
+    "nodemon": "^3.1.9",
+    "openai": "^4.86.2",
+    "prettier": "^3.5.3",
+    "prettier-plugin-java": "^2.6.7",
+    "serve-favicon": "^2.5.0"
+  }
+}

@@ -1,0 +1,20 @@
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './lib/react-query';
+import { AuthProvider } from './context/AuthContext';
+import { AppRouter } from './routes/AppRouter';
+
+const App: React.FC = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AuthProvider>
+          <AppRouter />
+        </AuthProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
+  );
+};
+
+export default App;

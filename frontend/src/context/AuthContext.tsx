@@ -1,0 +1,67 @@
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { api } from '../lib/axios';
+
+interface User {
+  _id: string;
+  username: string;
+  email: string;
+}
+
+interface AuthContextType {
+  user: User | null;
+  isLoading: boolean;
+  login: (user: User) => void;
+  logout: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await api.get('/auth/me');
+        if (response.data.success && response.data.user) {
+          setUser(response.data.user);
+        }
+      } catch (error) {
+        // Not authenticated
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  const login = (userData: User) => {
+    setUser(userData);
+  };
+
+  const logout = async () => {
+    try {
+      await api.post('/auth/logout');
+      setUser(null);
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, isLoading, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
