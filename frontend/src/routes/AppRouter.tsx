@@ -11,13 +11,7 @@ const ProblemsPage = React.lazy(() => import('../features/problems/pages/Problem
 const ProblemDetailPage = React.lazy(() => import('../features/problems/pages/ProblemDetailPage'));
 const ProfilePage = React.lazy(() => import('../features/users/pages/ProfilePage'));
 
-// Placeholder components until pages are built
-const Placeholder = ({ name }: { name: string }) => (
-  <div className="container animate-fade-in" style={{ paddingTop: '4rem', textAlign: 'center' }}>
-    <h1 className="gradient-text">{name} Page</h1>
-    <p style={{ color: 'var(--text-secondary)', marginTop: '1rem' }}>Coming soon in Phase 3</p>
-  </div>
-);
+
 
 export const AppRouter: React.FC = () => {
   return (

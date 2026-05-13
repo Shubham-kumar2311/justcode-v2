@@ -79,6 +79,26 @@ export class AuthController {
       next(error);
     }
   };
+
+  public oauthCallback = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      if (!req.user) {
+        res.redirect(`${env.FRONTEND_URL}/login?error=OAuthFailed`);
+        return;
+      }
+      
+      // Generate token
+      const token = authService.generateToken(req.user as any); // Cast as any because req.user from passport might not match exactly, but we just need its properties for our payload
+      
+      // Set cookie
+      this.setCookie(res, token);
+      
+      // Redirect to frontend
+      res.redirect(env.FRONTEND_URL);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export const authController = new AuthController();

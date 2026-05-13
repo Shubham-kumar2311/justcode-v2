@@ -6,6 +6,8 @@ export interface IUser extends Document {
   username: string;
   email: string;
   password?: string;
+  googleId?: string;
+  githubId?: string;
   salt?: string; // Legacy salt for HMAC-SHA256 migration
   solvedProblems: {
     problemId: mongoose.Types.ObjectId;
@@ -34,6 +36,12 @@ const userSchema = new Schema<IUser>(
     password: {
       type: String,
     },
+    googleId: {
+      type: String,
+    },
+    githubId: {
+      type: String,
+    },
     salt: {
       type: String,
     },
@@ -59,10 +67,6 @@ const userSchema = new Schema<IUser>(
   },
   { timestamps: true }
 );
-
-// Indexes
-userSchema.index({ email: 1 });
-userSchema.index({ username: 1 });
 
 // Note: Password hashing is now handled in the AuthService to decouple
 // business logic from the Mongoose model and to facilitate the dual-hash migration.

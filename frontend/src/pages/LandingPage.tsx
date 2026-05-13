@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Code2, Zap, Shield, Cpu } from 'lucide-react';
+import { Zap, Shield, Cpu } from 'lucide-react';
 
 export const LandingPage: React.FC = () => {
   return (

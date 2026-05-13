@@ -16,6 +16,12 @@ interface EnvConfig {
   FRONTEND_URL: string;
   EXECUTION_PROVIDER: 'judge0' | 'docker';
   AI_PROVIDER: 'rapidapi' | 'openai';
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
+  GOOGLE_CALLBACK_URL: string;
+  GITHUB_CLIENT_ID: string;
+  GITHUB_CLIENT_SECRET: string;
+  GITHUB_CALLBACK_URL: string;
 }
 
 function getEnvVar(key: string, fallback?: string): string {
@@ -39,4 +45,10 @@ export const env: EnvConfig = {
   FRONTEND_URL: getEnvVar('FRONTEND_URL', 'http://localhost:5173'),
   EXECUTION_PROVIDER: getEnvVar('EXECUTION_PROVIDER', 'judge0') as 'judge0' | 'docker',
   AI_PROVIDER: getEnvVar('AI_PROVIDER', 'rapidapi') as 'rapidapi' | 'openai',
+  GOOGLE_CLIENT_ID: getEnvVar('GOOGLE_CLIENT_ID', 'placeholder'),
+  GOOGLE_CLIENT_SECRET: getEnvVar('GOOGLE_CLIENT_SECRET', 'placeholder'),
+  GOOGLE_CALLBACK_URL: getEnvVar('GOOGLE_CALLBACK_URL', 'http://localhost:8001/api/auth/google/callback'),
+  GITHUB_CLIENT_ID: getEnvVar('GITHUB_CLIENT_ID', 'placeholder'),
+  GITHUB_CLIENT_SECRET: getEnvVar('GITHUB_CLIENT_SECRET', 'placeholder'),
+  GITHUB_CALLBACK_URL: getEnvVar('GITHUB_CALLBACK_URL', 'http://localhost:8001/api/auth/github/callback'),
 };

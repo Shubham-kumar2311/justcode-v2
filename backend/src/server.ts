@@ -26,6 +26,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Initialize Passport
+import passport from './config/passport';
+app.use(passport.initialize());
+
 // Global Auth Middleware (parses JWT on every request, but doesn't block)
 app.use(authMiddleware);
 
